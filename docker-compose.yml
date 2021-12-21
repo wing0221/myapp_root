@@ -16,7 +16,7 @@ services:
       # データベースのパスワード
       POSTGRES_PASSWORD: $POSTGRES_PASSWORD
     # ホスト側のディレクトリをコンテナで使用する
-    command: /bin/sh -c "rm -f tmp/pids/server.pid && bundle exec rails s -p 3000 -b '0.0.0.0'"
+    # command: /bin/sh -c "rm -f tmp/pids/server.pid && bundle exec rails s -p 3000 -b '0.0.0.0'"
     # volumes: ホストパス(絶対 or 相対):コンテナパス(絶対)
     volumes:
       - "./api/tmp/db:/var/lib/postgresql/data"
@@ -31,6 +31,7 @@ services:
     environment:
       POSTGRES_PASSWORD: $POSTGRES_PASSWORD
       API_DOMAIN: "localhost:$FRONT_PORT"
+    command: /bin/sh -c "rm -f tmp/pids/server.pid && bundle exec rails s -p 3000 -b '0.0.0.0'"
     volumes:
       - "./api:/$WORKDIR"
     # サービスの依存関係を定義(起動の順番)
